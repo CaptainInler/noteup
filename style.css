@@ -1,0 +1,38 @@
+#container{
+    border: 3px dashed silver;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+
+    background: #232323;
+}
+
+.rowObject{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.firstcolumn{
+    flex:2;
+}
+.secondcolumn{
+    flex:10;
+}
+.thirddcolumn{
+    flex:2;
+}
+
+header{
+
+    background: lime;
+    margin:5px;
+}
+
+
+div {
+
+    background: blue;
+    margin:5px;
+}
+
+

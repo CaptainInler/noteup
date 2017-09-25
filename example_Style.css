@@ -1,0 +1,21 @@
+#container{
+    border: 3px dashed silver;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    background: #232323;
+
+}
+
+header, nav, main, footer {
+    height: 100px;
+    width: 100px;
+    background: lime;
+    margin:5px;
+}
+
+
+
+main{
+    flex: 1;
+}

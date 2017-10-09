@@ -11,34 +11,35 @@
 
 <header>
 
-    <label for="noteInputTitle">Title</label><br>
-    <input type="text" id="noteInputTitle" value="Irgendwas">
+    <h1>Notiz erfassen</h1>
 
 </header>
+<main>
+    <div>
+        <label for="noteInputTitle">Titel</label><br>
+        <input type="text" id="noteInputTitle" value="Irgendwas">
+    </div>
 
-<div id="noteDescription">
-    <label for="noteInputText">Beschreibung</label><br>
-    <input type="text" id="noteInputText" value="Irgendwas">
-</div>
+    <div id="noteDescription">
+        <label for="noteInputText">Beschreibung</label><br>
+        <textarea id="noteInputText" value="Irgendwas"></textarea>
+    </div>
 
-<div id="noteImportance">
-    <label for="noteInputImportance">Wichtigkeit</label><br>
-    <input type="text" id="noteInputImportance" value="Irgendwas">
-</div>
+    <div id="noteImportance">
+        <label for="noteInputImportance">Wichtigkeit</label><br>
+        <input type="text" id="noteInputImportance" value="Irgendwas">
+    </div>
 
-<div id="noteDate">
-    <label for="noteInputDate">Erledigt bis</label><br>
-    <input type="date" id="noteInputDate" value="Irgendwas">
-</div>
+    <div id="noteDate">
+        <label for="noteInputDate">Erledigt bis</label><br>
+        <input type="date" id="noteInputDate" value="Irgendwas">
+    </div>
 
-<div id="noteSave">
-
-    <input type="button" id="noteBtnSave" value="Speichern">
-</div>
-
+</main>
 <footer id="noteCancel">
-
-    <input type="button" id="noteBtnCancel" value="Abbrechen">
+    <script src="code.js"></script>
+    <input type="button" id="noteBtnSave" onClick="save()" value="Speichern">
+    <input type="button" id="noteBtnCancel" onClick="location.href='index.html'" value="Abbrechen">
 </footer>
 
 

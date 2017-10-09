@@ -18,3 +18,11 @@ function save(){
     //die alte anzeige wird gelöscht und stattdessen index.html angezeigt
     window.location.replace("index.html");
 };
+
+
+var context = {
+    "note" : [
+        {"noteTitle":"Ritesh"},
+        {"noteTitle":"John"}
+    ]
+}

@@ -1,17 +1,17 @@
 
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Projekt1 beim CAS-FEE an der HSR</title>
     <link rel="stylesheet" href="style.css">
+    <script src="handlebars-v4.0.10.js"></script>
+    <script src="code.js"></script>
 </head>
 <body>
 
         <header>
-
                 <h1>Notizverwaltung</h1>
-
         </header>
 
         <nav>
@@ -21,32 +21,44 @@
             <button id="shFinished">Show Finished</button>
         </nav>
 
-        <div id="flexitem1">
-            <main>
-                <div class="firstcolumn">
-                    <input type="checkbox" name= doneOrNot id="doneOrNot" checked>
-                    <label for="doneOrNot">irgendwann</label>
-                </div>
-                <div class="secondcolumn">
-                    <label for="inputText">Titel für diesen Eintrag</label><br>
-                    <input type="text" id="inputText" value="Irgendwas">
-                </div>
-                <div class="thirddcolumn">
-                    <button id="noteEdit">Edit</button>
-                </div>
-            </main>
+        <nav>
+            <button id="createNote" onClick="location.href='notiz.html'">Notiz erstellen</button>
+            <button id="changeStyle">Change Style</button>
+        </nav>
 
-            <aside>
-                <button id="createNote" onClick="location.href='notiz.html'">Notiz erstellen</button>
-                <button id="changeStyle">Change Style</button>
-            </aside>
+        <script id="handlebars-demo" type="text/x-handlebars-template">
+        {{#each note}}
+        <main id="flexitem1">
+            <input id="noteTitle" class="note">
+                <label for="noteInputTitle">Titel</label>
+                <input type="text" id="noteInputTitle" disabled>{{noteTitle}}</input>
+            </div>
 
-        </div>
+            <div id="noteDescription" class="note">
+                <label for="noteInputText">Beschreibung</label>
+                <textarea id="noteInputText" value="Irgendwas"  rows="5" cols="50" disabled></textarea>
+            </div>
 
+            <div id="noteImportance" class="note">
+                <label for="noteInputImportance">Wichtigkeit</label>
+                <input type="text" id="noteInputImportance" value="Irgendwas" disabled>
+            </div>
 
-        <footer>
-            test
-        </footer>
+            <div id="noteDate" class="note">
+                <label for="noteInputDate">Erledigt bis</label>
+                <input type="date" id="noteInputDate" value="Irgendwas" disabled>
+            </div>
+
+            <div id="finished" class="note">
+                <input type="checkbox" id="finishedNote">Erledigt</input>
+            </div>
+
+            <div id="edit" class="note">
+                <button id="editNote">Bearbeiten</button>
+            </div>
+        </main>
+        {{/each}}
+        </script>
 
 
 

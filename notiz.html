@@ -14,24 +14,24 @@
     <h1>Notiz erfassen</h1>
 
 </header>
-<main>
-    <div>
-        <label for="noteInputTitle">Titel</label><br>
+<main id="flexitem1">
+    <div id="noteTitle" class="note">
+        <label for="noteInputTitle">Titel</label>
         <input type="text" id="noteInputTitle" value="Irgendwas">
     </div>
 
-    <div id="noteDescription">
-        <label for="noteInputText">Beschreibung</label><br>
-        <textarea id="noteInputText" value="Irgendwas"></textarea>
+    <div id="noteDescription" class="note">
+        <label for="noteInputText">Beschreibung</label>
+        <textarea id="noteInputText" value="Irgendwas"  rows="5" cols="50"></textarea>
     </div>
 
-    <div id="noteImportance">
-        <label for="noteInputImportance">Wichtigkeit</label><br>
+    <div id="noteImportance" class="note">
+        <label for="noteInputImportance">Wichtigkeit</label>
         <input type="text" id="noteInputImportance" value="Irgendwas">
     </div>
 
-    <div id="noteDate">
-        <label for="noteInputDate">Erledigt bis</label><br>
+    <div id="noteDate" class="note">
+        <label for="noteInputDate">Erledigt bis</label>
         <input type="date" id="noteInputDate" value="Irgendwas">
     </div>
 

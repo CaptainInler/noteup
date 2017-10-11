@@ -1,9 +1,31 @@
+"use strict";
+
+document.addEventListener("DOMContentLoaded", main);
+
+function main() {
+
+
+    let tlContent = document.getElementById("notiz");
+
+    let source = tlContent.innerHTML;
+    let template = Handlebars.compile(source);
+
+    let context = [{noteTitle:"Ritesh"},
+        {noteTitle:"John"}
+    ];
+
+    let result = template(context);
+
+    tlContent.insertAdjacentHTML('afterend', result);
+}
+
+
 function save(){
-    var notiz = [];
+    let notiz = [];
     //lesen der bisher abgespeicherten Daten
 
 
-    var notizen = JSON.parse(sessionStorage.getItem("notiz"));
+    let notizen = JSON.parse(sessionStorage.getItem("notiz"));
     if (!(notizen === null)){
         notiz.push(notizen)
     }
@@ -20,9 +42,8 @@ function save(){
 };
 
 
-var context = {
-    "note" : [
-        {"noteTitle":"Ritesh"},
-        {"noteTitle":"John"}
-    ]
-}
+
+
+
+
+

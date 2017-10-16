@@ -25,29 +25,29 @@
             <button id="changeStyle">Change Style</button>
         </nav>
 
-        <script id="notiz" type="text/x-handlebars-template">
+        <script id="notizVorlage" type="text/x-handlebars-template">
 
             {{#each this}}
             <main id="flexitem1">
 
                 <div id="noteTitle" class="note">
                     <label for="noteInputTitle">Titel</label>
-                    <input type="text" id="noteInputTitle" disabled value={{noteTitle}}>
+                    <input type="text" id="noteInputTitle" disabled value={{noteInputTitle}}>
                 </div>
 
                 <div id="noteDescription" class="note">
                     <label for="noteInputText">Beschreibung</label>
-                    <textarea id="noteInputText" value="Irgendwas"  rows="5" cols="50" disabled></textarea>
+                    <textarea id="noteInputText" rows="5" cols="50" disabled>{{noteInputText}}</textarea>
                 </div>
 
                 <div id="noteImportance" class="note">
                     <label for="noteInputImportance">Wichtigkeit</label>
-                    <input type="text" id="noteInputImportance" value="Irgendwas" disabled>
+                    <input type="text" id="noteInputImportance" value={{noteInputImportance}} disabled>
                 </div>
 
                 <div id="noteDate" class="note">
                     <label for="noteInputDate">Erledigt bis</label>
-                    <input type="date" id="noteInputDate" value="Irgendwas" disabled>
+                    <input type="date" id="noteInputDate" disabled value={{noteInputDate}}>
                 </div>
 
                 <div id="finished" class="note">
@@ -63,5 +63,7 @@
 
         <script src="handlebars-v4.0.10.js"></script>
         <script src="code.js"></script>
+        <script src="model.js"></script>
+
 
 </body>

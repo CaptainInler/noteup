@@ -1,18 +1,34 @@
 "use strict";
 
+// Controller
+
 document.addEventListener("DOMContentLoaded", main);
 
 function main() {
 
+    // Handlebar template entgegen nehmen
+    let tlContent = document.getElementById("notizVorlage");
 
-    let tlContent = document.getElementById("notiz");
+    // TODO: Im Moment wird hier geschaut ob man im korrekten html ist. Vielleicht mit namespaces lösen?
+    // https://stackoverflow.com/a/9059603
+
+    if (tlContent === null){
+        return;
+    }
 
     let source = tlContent.innerHTML;
     let template = Handlebars.compile(source);
 
-    let context = [{noteTitle:"Ritesh"},
-        {noteTitle:"John"}
-    ];
+    let context = getSavedNotes();
+
+    // let context = [{noteInputTitle:"Julia", noteInputText:"testJulia", noteInputDate:"2017-10-03"},
+    //     {noteInputTitle:"Daniel", noteInputText:"testDaniel"},
+    //     {noteInputTitle:"Christoph", noteInputText:"testChristoph"},
+    //     {noteInputTitle:"Marc", noteInputText:"testMarc"}
+    //
+    // ];
+
+
 
     let result = template(context);
 
@@ -20,26 +36,23 @@ function main() {
 }
 
 
+
 function save(){
-    let notiz = [];
-    //lesen der bisher abgespeicherten Daten
+
+    let title = document.getElementById("noteInputTitle").value;
+    let description = document.getElementById("noteInputText").value;
+    let importance = document.getElementById("noteInputImportance").value;
+    let date = document.getElementById("noteInputDate").value;
 
 
-    let notizen = JSON.parse(sessionStorage.getItem("notiz"));
-    if (!(notizen === null)){
-        notiz.push(notizen)
-    }
+    let note = new notiz(title, description, importance, date)
 
-
-    //der wert im tag mit id "noteInputText" wird in den array gespeichert
-    notiz.push(document.getElementById("noteInputText").value);
-
-    // werte in den sessionstorage speichern
-    sessionStorage.setItem("notiz", JSON.stringify(notiz));
+    addToSessionCache(note)
 
     //die alte anzeige wird gelöscht und stattdessen index.html angezeigt
     window.location.replace("index.html");
-};
+
+}
 
 
 

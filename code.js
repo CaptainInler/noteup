@@ -21,7 +21,6 @@ function main() {
     //     {noteInputTitle:"Daniel", noteInputText:"testDaniel"},
     //     {noteInputTitle:"Christoph", noteInputText:"testChristoph"},
     //     {noteInputTitle:"Marc", noteInputText:"testMarc"}
-    //
     // ];
 
     // Notizen in das Handlebarstemplate einfügen
@@ -32,24 +31,19 @@ function main() {
 }
 
 
-
-
 /**
  * Wird aufgerufen, wenn auf der Hauptseite der Button zum erstellen oder editiern einer Notiz geklickt wird.
  */
 function editNote(event){
 
-
+    // prüfen ob eine neue Notiz erstellt werden soll oder eine bestehende editiert
     if (event.id === "createNote"){
         sessionStorage.create = "create";
     }
     else if (event.id === "editNote"){
-        // ID der bearbeitenden Notiz finden
-        let valueIdentifi = event.parentNode.parentNode.firstElementChild.getAttribute("value");
-        // Id in den sessionstorage ablegen
-        sessionStorage.create = valueIdentifi;
+        // Idder bearbeitenden Notiz finden und in den sessionstorage ablegen
+        sessionStorage.create = event.parentNode.parentNode.firstElementChild.getAttribute("value");
     }
-
     window.location.replace("notiz.html");
 }
 
@@ -65,56 +59,38 @@ function mainNote(){
 
     // Prüfen ob eine neu Notiz erstellt, oder ob eine bstehende Notiz bearbeitet werden soll
     if (sessionStorage.create === "create"){
-        displayEmptyNote();
+        displayNote();
     }
     else if(sessionStorage.create !== undefined){
+        // Notiz aus dem Sessionstorage heraussuchen und darstellen lassen
         let note = getNoteByID(sessionStorage.create);
-        displayEditNote(note);
+        deleteNote(sessionStorage.create);
+        displayNote(note);
     }
 }
 
-/**
- * Gibt die Informationen einer spezifischenNotiz aus dem sessionstorage zurück
- * @param id - ID der Notiz welche gesucht wird
- */
-function getNoteByID(id){
-    let allNotes = getSavedNotes();
-
-    // Suchen nach der Notiz mit der entsprechenden ID
-    for (var i = 0; i < allNotes.length; i++) {
-        if (allNotes[i].noteID == id) {
-            return allNotes[i]
-        }
-    }
-}
 
 /**
- *
- * @param id
+ * Zeigt den Inhlat einer Notiz in notiz.html an
+ * @param {notiz} [context] - Die Angaben zu einer Notiz
  */
-function deleteNote(id){
-//TODO: hier gehts weiter
-}
-
-
-
-/**
- * Aktion wenn eine neue Notiz erstellt werden soll
- */
-function displayEmptyNote(){
+function displayNote(context){
 
     // Handlebar template entgegen nehmen
     let tlContent = document.getElementById("notizBearbeiten");
     let source = tlContent.innerHTML;
     let template = Handlebars.compile(source);
 
-
-    let context = {noteInputTitle: "Titel...",
-        noteInputText: "Beschreibung...",
-        noteInputImportance: "",
-        noteInputDate: ""
-    };
-
+    if (context === undefined){
+        context = {noteInputTitle: "Titel...",
+            noteInputText: "Beschreibung...",
+            noteInputImportance: "",
+            noteInputDate: ""
+        };
+    }
+    else{
+        context = context.getNote();
+    }
 
     // Notizen in das Handlebarstemplate einfügen
     let result = template(context);
@@ -122,34 +98,6 @@ function displayEmptyNote(){
     // handlebarteplate inkl. daten in das html einfügen
     tlContent.insertAdjacentHTML('afterend', result);
 }
-
-
-/**
- * Zeigt den inhlat einer notiz in notiz.html an
- */
-function displayEditNote(context){
-
-    // Handlebar template entgegen nehmen
-    let tlContent = document.getElementById("notizBearbeiten");
-    let source = tlContent.innerHTML;
-    let template = Handlebars.compile(source);
-
-
-    // let context = {noteInputTitle: "Titel...",
-    //     noteInputText: "Beschreibung...",
-    //     noteInputImportance: "",
-    //     noteInputDate: ""
-    // };
-
-
-    // Notizen in das Handlebarstemplate einfügen
-    let result = template(context);
-
-    // handlebarteplate inkl. daten in das html einfügen
-    tlContent.insertAdjacentHTML('afterend', result);
-}
-
-
 
 
 /**
@@ -161,13 +109,16 @@ function saveNote(){
     let description = document.getElementById("noteInputText").value;
     let importance = document.getElementById("noteInputImportance").value;
     let date = document.getElementById("noteInputDate").value;
+    let finished = "";
+    if (document.getElementById("noteInputFinished").checked){
+        finished = "checked";
+    }
     let id = title + window.performance.now() + Math.random();
 
-    let note = new notiz(id, title, description, importance, date);
+    let note = new notiz(id, title, description, importance, date, finished);
 
-    addToSessionCache(note);
+    addNoteToSessionCache(note);
 
     //die Darstelung zum Erstellen einer Notiz wird durch index.html ersetzt
     window.location.replace("index.html");
-
 }

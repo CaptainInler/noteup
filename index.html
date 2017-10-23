@@ -21,41 +21,45 @@
         </nav>
 
         <nav>
-            <button id="createNote" onClick="location.href='notiz.html'">Notiz erstellen</button>
+            <button id="createNote" onClick=editNote(this)>Notiz erstellen</button>
+            <!--<button id="createNote" onClick=location.href='notiz.html'>Notiz erstellen</button>-->
             <button id="changeStyle">Change Style</button>
         </nav>
 
         <script id="notizVorlage" type="text/x-handlebars-template">
 
             {{#each this}}
-            <main id="flexitem1">
+            <main class="flexitem1">
 
-                <div id="noteTitle" class="note">
+                <div class="noteIdentifaction" style="display: none;" value="{{noteID}}"></div>
+
+                <div class="noteTitle" class="note">
                     <label for="noteInputTitle">Titel</label>
                     <input type="text" id="noteInputTitle" disabled value={{noteInputTitle}}>
                 </div>
 
-                <div id="noteDescription" class="note">
+                <div class="noteDescription" class="note">
                     <label for="noteInputText">Beschreibung</label>
                     <textarea id="noteInputText" rows="5" cols="50" disabled>{{noteInputText}}</textarea>
                 </div>
 
-                <div id="noteImportance" class="note">
+                <div class="noteImportance" class="note">
                     <label for="noteInputImportance">Wichtigkeit</label>
-                    <input type="text" id="noteInputImportance" value={{noteInputImportance}} disabled>
+                    <input type="text" id="noteInputImportance" disabled value={{noteInputImportance}}>
                 </div>
 
-                <div id="noteDate" class="note">
+                <div class="noteDate" class="note">
                     <label for="noteInputDate">Erledigt bis</label>
                     <input type="date" id="noteInputDate" disabled value={{noteInputDate}}>
                 </div>
 
-                <div id="finished" class="note">
-                    <input type="checkbox" id="finishedNote">Erledigt</input>
+                <div class="finished" class="note">
+                    <label for="finishedNote">Erledigt</label>
+                    <input type="checkbox" id="finishedNote" {{noteInputFinished}} disabled>
                 </div>
 
-                <div id="edit" class="note">
-                    <button id="editNote">Bearbeiten</button>
+                <div class="edit" class="note">
+                    <button id="editNote" onClick=editNote(this)>Bearbeiten</button>
                 </div>
             </main>
             {{/each}}
@@ -64,6 +68,8 @@
         <script src="handlebars-v4.0.10.js"></script>
         <script src="code.js"></script>
         <script src="model.js"></script>
-
+        <script>
+            document.addEventListener("DOMContentLoaded", main());
+        </script>
 
 </body>

@@ -15,36 +15,54 @@
     <h1>Notiz erfassen</h1>
 
 </header>
-<main id="flexitem1">
 
-    <div id="noteTitle" class="note">
-        <label for="noteInputTitle">Titel</label>
-        <input type="text" id="noteInputTitle" value="Irgendwas">
-    </div>
+<script id="notizBearbeiten" type="text/x-handlebars-template">
 
-    <div id="noteDescription" class="note">
-        <label for="noteInputText">Beschreibung</label>
-        <textarea id="noteInputText" value="Irgendwas"  rows="5" cols="50"></textarea>
-    </div>
+    <main id="flexitem1">
 
-    <div id="noteImportance" class="note">
-        <label for="noteInputImportance">Wichtigkeit</label>
-        <input type="text" id="noteInputImportance" value="Irgendwas">
-    </div>
+        <div id="noteTitle" class="note">
+            <label for="noteInputTitle">Titel</label>
+            <input type="text" id="noteInputTitle" value={{noteInputTitle}}>
+        </div>
 
-    <div id="noteDate" class="note">
-        <label for="noteInputDate">Erledigt bis</label>
-        <input type="date" id="noteInputDate" value="Irgendwas">
-    </div>
+        <div id="noteDescription" class="note">
+            <label for="noteInputText">Beschreibung</label>
+            <textarea id="noteInputText" rows="5" cols="50">{{noteInputText}}</textarea>
+        </div>
 
-</main>
+        <div id="noteImportance" class="note">
+            <label for="noteInputImportance">Wichtigkeit</label>
+            <input type="text" id="noteInputImportance" value={{noteInputImportance}}>
+        </div>
+
+        <div id="noteDate" class="note">
+            <label for="noteInputDate">Erledigt bis</label>
+            <input type="date" id="noteInputDate" value={{noteInputDate}}>
+        </div>
+
+        <div class="finished" class="note">
+            <label for="noteInputFinished">Erledigt</label>
+            <input type="checkbox" id="noteInputFinished" {{noteInputFinished}}>
+        </div>
+
+
+    </main>
+
+</script>
+
+
 <footer id="noteCancel">
     <script src="code.js"></script>
-    <input type="button" id="noteBtnSave" onClick="save()" value="Speichern">
+    <input type="button" id="noteBtnSave" onClick="saveNote()" value="Speichern">
     <input type="button" id="noteBtnCancel" onClick="location.href='index.html'" value="Abbrechen">
 </footer>
 
+<script src="handlebars-v4.0.10.js"></script>
 
+<script>
+    // TODO: Abklären ob hier wirklich ein eventhandler nötig ist oder ob handlebar sonstwie aufgerufen werden kann..
+    document.addEventListener("DOMContentLoaded", mainNote());
+</script>
 
 </body>
 </html>

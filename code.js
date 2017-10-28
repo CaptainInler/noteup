@@ -1,8 +1,6 @@
 "use strict";
 
-
 // Controller
-
 
 /**
  * Liest die gespeicherten Notizen aus dem Modell aus und gibt sie in die Browseranzeige aus.
@@ -16,12 +14,6 @@ function main() {
 
     // abrufen der bereits gespeicherten Notizen
     let context = getSavedNotes();
-
-    // let context = [{noteInputTitle:"Julia", noteInputText:"testJulia", noteInputDate:"2017-10-03"},
-    //     {noteInputTitle:"Daniel", noteInputText:"testDaniel"},
-    //     {noteInputTitle:"Christoph", noteInputText:"testChristoph"},
-    //     {noteInputTitle:"Marc", noteInputText:"testMarc"}
-    // ];
 
     // Notizen in das Handlebarstemplate einfügen
     let result = template(context);
@@ -72,7 +64,7 @@ function mainNote(){
 
 /**
  * Zeigt den Inhlat einer Notiz in notiz.html an
- * @param {notiz} [context] - Die Angaben zu einer Notiz
+ * @param {notiz} [context] - Ein Notizobjekt
  */
 function displayNote(context){
 
@@ -85,7 +77,8 @@ function displayNote(context){
         context = {noteInputTitle: "Titel...",
             noteInputText: "Beschreibung...",
             noteInputImportance: "",
-            noteInputDate: ""
+            noteInputDate: "",
+            noteID: "0"
         };
     }
     else{
@@ -113,7 +106,11 @@ function saveNote(){
     if (document.getElementById("noteInputFinished").checked){
         finished = "checked";
     }
-    let id = title + window.performance.now() + Math.random();
+
+    let id = document.getElementById("noteIdentifaction").getAttribute("value");
+    if (id==="0"){
+        id = title + window.performance.now() + Math.random();
+    }
 
     let note = new notiz(id, title, description, importance, date, finished);
 

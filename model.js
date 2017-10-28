@@ -25,7 +25,6 @@ class notiz {
         this.importance = importance;
         this.date = date;
         this.finished = finished;
-
     }
 
 

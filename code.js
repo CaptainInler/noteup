@@ -39,7 +39,53 @@ function editNote(event){
     window.location.replace("notiz.html");
 }
 
+/**
+ * Sortiert die gespeicherten Notizen nach der Datum wann es abgeschlossen sein soll
+ * @param {string} direction - "up" oder "down" je nach dem in welche richtung sortiert werden soll
+ */
+function sortFinished(direction) {
 
+    sortNote("noteInputDate", direction);
+    window.location.replace("index.html");
+}
+
+
+/**
+ * Sortiert die gespeicherten Notizen nach der Datum wann sie erstellt wurden
+ * @param {string} direction - "up" oder "down" je nach dem in welche richtung sortiert werden soll
+ */
+function sortCreate(direction) {
+
+    sortNote("noteCreateDate", direction);
+    window.location.replace("index.html");
+}
+
+/**
+ * Sortiert die gespeicherten Notizen nach der Wichtigkeit
+ * @param {string} direction - "up" oder "down" je nach dem in welche richtung sortiert werden soll
+ */
+function sortImportance(direction) {
+
+    sortNote("noteInputImportance", direction);
+    window.location.replace("index.html");
+}
+
+/**
+ * Zeigt auf der Hauptseite die erledigten Notizen an oder eben nicht
+ * @param checkbox
+ */
+function showFinished(checkbox) {
+
+    if (checkbox.checked)
+    {
+        // TODO: hier gehts weiter
+    }
+    else{
+
+    }
+
+
+}
 
 // -------------------------------------------------------------------------------------------------------------------
 // Teil für notiz.html
@@ -56,7 +102,6 @@ function mainNote(){
     else if(sessionStorage.create !== undefined){
         // Notiz aus dem Sessionstorage heraussuchen und darstellen lassen
         let note = getNoteByID(sessionStorage.create);
-        deleteNote(sessionStorage.create);
         displayNote(note);
     }
 }
@@ -78,7 +123,8 @@ function displayNote(context){
             noteInputText: "Beschreibung...",
             noteInputImportance: "",
             noteInputDate: "",
-            noteID: "0"
+            noteID: "0",
+            noteCreateDate: "0"
         };
     }
     else{
@@ -107,12 +153,21 @@ function saveNote(){
         finished = "checked";
     }
 
-    let id = document.getElementById("noteIdentifaction").getAttribute("value");
-    if (id==="0"){
-        id = title + window.performance.now() + Math.random();
+    let created = document.getElementById("noteCreateDate").getAttribute("value");
+    if (created==="0"){
+        created = Date.now();
     }
 
-    let note = new notiz(id, title, description, importance, date, finished);
+    let id = document.getElementById("noteIdentifaction").getAttribute("value");
+    if (id==="0"){
+        id = Date.now() + title + Math.random();
+    }
+    else{
+        // löschen der alten Notiz
+        deleteNote(id);
+    }
+
+    let note = new notiz(id, title, description, importance, date, finished, created);
 
     addNoteToSessionCache(note);
 

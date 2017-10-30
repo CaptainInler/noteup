@@ -3,28 +3,41 @@ body{
     margin: auto;
 }
 
-.container{
-    border: 3px dashed silver;
-    background-color: lightgrey;
-    display: flex;
-    flex-direction: column;
-}
 
-#flexitem1{
+.flexitem1{
     display: flex;
     flex-direction: column;
 
 }
 
-.note{
+.flexitem2{
+    display: flex;
     justify-content: space-around;
-    padding-bottom: 5px;
-    padding-top: 5px;
+    flex-direction: row;
 }
+
+.sorter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 50px;
+
+
+    /*background: darkgoldenrod;*/
+}
+
+a{
+    font-size: larger;
+    margin: 0 0 0 0;
+    cursor:pointer;
+}
+
+
 
 header,
 main,
-aside,
 nav,
 footer{
     background: cornflowerblue;
@@ -35,18 +48,7 @@ footer{
     margin: 12px;
 
 }
-main {
-    order: 2;
-    flex: 5;
-}
-aside {
-    order: 1;
-    flex: 1;
-}
 
-footer {
-    clear: both;
-}
 
 label {
     display: inline-block;
@@ -54,5 +56,3 @@ label {
     text-align: right;
     vertical-align: top;
 }​
-
-

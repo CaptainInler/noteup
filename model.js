@@ -17,24 +17,28 @@ class notiz {
      * @param {int} importance - Wichtigkeit der Notiz
      * @param {string} date - Datum, bis wann die Notiz erledigt sein soll
      * @param {string} finished - "checked" falls die Aufgabe erledigt ist, sonst ""
+     * @param {string} created - Datum, wann die Notiz erstellt wurde
      */
-    constructor(id, title, description, importance, date, finished) {
+    constructor(id, title, description, importance, date, finished, created) {
         this.id = id;
         this.titel = title;
         this.description = description;
         this.importance = importance;
         this.date = date;
         this.finished = finished;
+        this.created = created;
     }
 
 
     /**
      * @typedef {Object} notiz
+     * @property {string} noteID - ID der Notiz
      * @property {string} noteInputTitle - Titel
      * @property {string} noteInputText - Text
      * @property {int} noteInputImportance - Wichtigkeit
      * @property {string} noteInputDate - Datum
      * @property {string} noteInputFinished - Fertig
+     * @property {string} noteCreateDate - Erstelldatum
      */
 
     /**
@@ -52,6 +56,7 @@ class notiz {
         notiz["noteInputImportance"] = this.importance;
         notiz["noteInputDate"] = this.date;
         notiz["noteInputFinished"] = this.finished;
+        notiz["noteCreateDate"] = this.created;
 
         return notiz
     }
@@ -69,7 +74,6 @@ function addNoteToSessionCache(notiz) {
 
     // die neu eingegebene notiz dem array hinzufügen
     note.push(notiz.getNote());
-
     sessionStorage.notizen = JSON.stringify(note);
 }
 
@@ -97,6 +101,8 @@ function getSavedNotes() {
 function getNoteByID(id){
     let allNotes = getSavedNotes();
 
+    //TODO: lässt sich sicher mit deleteNote() zusammenfügen. codeduplikation
+
     // Suchen nach der Notiz mit der entsprechenden ID
     for (let i = 0; i < allNotes.length; i++) {
         if (allNotes[i].noteID === id) {
@@ -105,7 +111,8 @@ function getNoteByID(id){
                 allNotes[i].noteInputText,
                 allNotes[i].noteInputImportance,
                 allNotes[i].noteInputDate,
-                allNotes[i].noteInputFinished);
+                allNotes[i].noteInputFinished,
+                allNotes[i].noteCreateDate);
         }
     }
 }
@@ -129,8 +136,35 @@ function deleteNote(id){
                 allNotes[i].noteInputText,
                 allNotes[i].noteInputImportance,
                 allNotes[i].noteInputDate,
-                allNotes[i].noteInputFinished);
+                allNotes[i].noteInputFinished,
+                allNotes[i].noteCreateDate);
             addNoteToSessionCache(note);
         }
     }
+}
+
+
+/**
+ *
+ * @param {string}  sortby - Notiztag nach welchem sortiert werden soll
+ * @param {string}  direction - richtung in welche zu sortieren ist
+ */
+function sortNote(sortby, direction){
+
+    let allNotes = getSavedNotes();
+
+    if (direction === "up") {
+        allNotes.sort(function (a, b) {
+
+            return parseInt(String(b[sortby]).replace(/-/g,'')) - parseInt(String(a[sortby]).replace(/-/g,''));
+        });
+    }
+    else {
+        allNotes.sort(function (a, b) {
+            return parseInt(String(a[sortby]).replace(/-/g,'')) - parseInt(String(b[sortby]).replace(/-/g,''));
+        });
+    }
+
+    sessionStorage.notizen = JSON.stringify(allNotes);
+
 }

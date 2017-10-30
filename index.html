@@ -14,15 +14,37 @@
         </header>
 
         <nav>
-            <button id="finishedDate">By finished Date</button>
-            <button id="createdDate">By created Date</button>
-            <button id="importance">By Importance</button>
-            <button id="shFinished">Show Finished</button>
+            <div class="flexitem2">
+                <div class="sorter">
+                    <div id="sortFinishedDate">Zu erledigen bis</div>
+                    <div>
+                        <a onClick=sortFinished("down") >&#x21c3;</a>
+                        <a onClick=sortFinished("up")>&#x21be;</a>
+                    </div>
+                </div>
+                <div class="sorter">
+                    <div id="sortCreatedDate">Erstellungsdatum</div>
+                    <div>
+                        <a onClick=sortCreate("down")>&#x21c3;</a>
+                        <a onClick=sortCreate("up")>&#x21be;</a>
+                    </div>
+                </div>
+                <div class="sorter">
+                    <div id="sortImportance">Wichtigkeit</div>
+                    <div>
+                        <a onClick=sortImportance("down")>&#x21c3;</a>
+                        <a onClick=sortImportance("up")>&#x21be;</a>
+                    </div>
+                </div>
+                <div class="sorter">
+                    <div id="sortDone">Erledigte anzeigen</div>
+                    <input type="checkbox" id="shFinished" onchange="showFinished(this)">
+                </div>
+            </div>
         </nav>
 
         <nav>
             <button id="createNote" onClick=editNote(this)>Notiz erstellen</button>
-            <!--<button id="createNote" onClick=location.href='notiz.html'>Notiz erstellen</button>-->
             <button id="changeStyle">Change Style</button>
         </nav>
 
@@ -32,6 +54,7 @@
             <main class="flexitem1">
 
                 <div class="noteIdentifaction" style="display: none;" value="{{noteID}}"></div>
+                <div class="noteCreateDate" style="display: none;" value="{{noteCreateDate}}"></div>
 
                 <div class="noteTitle" class="note">
                     <label for="noteInputTitle">Titel</label>

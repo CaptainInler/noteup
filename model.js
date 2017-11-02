@@ -42,7 +42,7 @@ class notiz {
      */
 
     /**
-     * gibt die Varaibeln der Notiz als Object zurück
+     * gibt die Variabeln der Notiz als Object zurück
      * @returns {notiz} Abgespeicherte Werte einer Notiz als Notiz-Objekt
      */
     getNote(){
@@ -155,7 +155,6 @@ function sortNote(sortby, direction){
 
     if (direction === "up") {
         allNotes.sort(function (a, b) {
-
             return parseInt(String(b[sortby]).replace(/-/g,'')) - parseInt(String(a[sortby]).replace(/-/g,''));
         });
     }

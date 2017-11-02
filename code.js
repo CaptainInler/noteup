@@ -15,11 +15,36 @@ function main() {
     // abrufen der bereits gespeicherten Notizen
     let context = getSavedNotes();
 
+
+
+    function checkDone(notiz) {
+        if (notiz.noteInputFinished === ""){
+            return notiz;
+        }
+
+    }
+
+    let showDone = JSON.parse(sessionStorage.showDone);
+
+    if (showDone === undefined){
+        showDone = false;
+    }
+
+    if (!showDone) {
+        context= context.filter(checkDone);
+    }
+
+
+
     // Notizen in das Handlebarstemplate einfügen
     let result = template(context);
 
+
+
     // handlebarteplate inkl. daten in das html einfügen
     tlContent.insertAdjacentHTML('afterend', result);
+
+    document.getElementById("shFinished").checked = showDone;
 }
 
 
@@ -33,7 +58,7 @@ function editNote(event){
         sessionStorage.create = "create";
     }
     else if (event.id === "editNote"){
-        // Idder bearbeitenden Notiz finden und in den sessionstorage ablegen
+        // ID der bearbeitenden Notiz finden und in den sessionstorage ablegen
         sessionStorage.create = event.parentNode.parentNode.firstElementChild.getAttribute("value");
     }
     window.location.replace("notiz.html");
@@ -74,17 +99,18 @@ function sortImportance(direction) {
  * Zeigt auf der Hauptseite die erledigten Notizen an oder eben nicht
  * @param checkbox
  */
-function showFinished(checkbox) {
+function ckbshFinished(checkbox) {
 
-    if (checkbox.checked)
-    {
-        // TODO: hier gehts weiter
+
+
+    if(checkbox.checked){
+        sessionStorage.showDone = JSON.stringify(true);
     }
-    else{
-
+    else {
+        sessionStorage.showDone = JSON.stringify(false);
     }
 
-
+    window.location.replace("index.html");
 }
 
 // -------------------------------------------------------------------------------------------------------------------
@@ -95,7 +121,7 @@ function showFinished(checkbox) {
  */
 function mainNote(){
 
-    // Prüfen ob eine neu Notiz erstellt, oder ob eine bstehende Notiz bearbeitet werden soll
+    // Prüfen ob eine neue Notiz erstellt, oder ob eine bestehende Notiz bearbeitet werden soll
     if (sessionStorage.create === "create"){
         displayNote();
     }

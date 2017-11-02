@@ -24,10 +24,13 @@ function main() {
 
     }
 
-    let showDone = JSON.parse(sessionStorage.showDone);
+    let showDone = sessionStorage.showDone;
 
     if (showDone === undefined){
         showDone = false;
+    }
+    else {
+        showDone = JSON.parse(sessionStorage.showDone);
     }
 
     if (!showDone) {
@@ -35,16 +38,31 @@ function main() {
     }
 
 
-
     // Notizen in das Handlebarstemplate einfügen
     let result = template(context);
-
 
 
     // handlebarteplate inkl. daten in das html einfügen
     tlContent.insertAdjacentHTML('afterend', result);
 
     document.getElementById("shFinished").checked = showDone;
+
+
+    if (sessionStorage.style !== undefined){
+        if (JSON.parse(sessionStorage.style) === "ori"){
+            document.getElementById("style").setAttribute("href", "alternativ.css");
+            document.getElementById("changeStyle").setAttribute("value", "alternativ");
+            document.getElementById("changeStyle").innerHTML = "Hier gehts zurück";
+        }
+        else{
+            document.getElementById("style").setAttribute("href", "style.css");
+            document.getElementById("changeStyle").setAttribute("value", "ori");
+            document.getElementById("changeStyle").innerHTML = "Nicht Drücken";
+
+        }
+    }
+
+
 }
 
 
@@ -101,8 +119,6 @@ function sortImportance(direction) {
  */
 function ckbshFinished(checkbox) {
 
-
-
     if(checkbox.checked){
         sessionStorage.showDone = JSON.stringify(true);
     }
@@ -112,6 +128,22 @@ function ckbshFinished(checkbox) {
 
     window.location.replace("index.html");
 }
+
+
+function changeStyle(button){
+
+    if(button.value === "ori"){
+        sessionStorage.style = JSON.stringify("ori");
+    }
+    else {
+        sessionStorage.style = JSON.stringify("alternativ");
+    }
+
+    window.location.replace("index.html");
+
+}
+
+
 
 // -------------------------------------------------------------------------------------------------------------------
 // Teil für notiz.html

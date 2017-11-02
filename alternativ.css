@@ -1,0 +1,104 @@
+body{
+    max-width: 700px;
+    margin: auto;
+
+    animation-name: bg;
+    animation: bg 0.2s linear infinite;
+}
+
+/* Standard syntax */
+@keyframes bg {
+
+
+    0%   {background-color: red;}
+    25%  {background-color: yellow;}
+    50%  {background-color: blue;}
+    100% {background-color: green;}
+}
+
+@keyframes notes {
+    from {background-color: yellow;}
+    to {background-color: red;}
+}
+
+
+
+.flexitem1{
+    position: relative;
+    animation: myfirst 5s linear 2s infinite alternate;
+
+}
+
+@keyframes myfirst {
+    0%   {background-color:red; left:-200px; top:0px;}
+    25%  {background-color:yellow; left:200px; top:-200px;}
+    50%  {background-color:blue; left:-200px; top:-200px;}
+    75%  {background-color:green; left:0px; top:200px;}
+    100% {background-color:red; left:-200px; top:0px;}
+}
+
+
+@-webkit-keyframes myfirst {
+    0%   {background-color:red; left:0px; top:0px;}
+    25%  {background-color:yellow; left:200px; top:0px;}
+    50%  {background-color:blue; left:200px; top:200px;}
+    75%  {background-color:green; left:0px; top:200px;}
+    100% {background-color:red; left:0px; top:0px;}
+}
+
+
+
+.flexitem2{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+.sorter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: 50px;
+
+
+
+}
+
+a{
+    font-size: larger;
+    margin: 0 0 0 0;
+    cursor:pointer;
+    animation-name: bg;
+    animation: bg 0.1s linear infinite;
+}
+
+
+
+header,
+main,
+nav,
+footer{
+    background: cornflowerblue;
+    border-radius: 6px;
+    color: white;
+    padding: 24px 15px;
+    text-align: left;
+    margin: 12px;
+
+
+}
+
+
+label {
+    display: inline-block;
+    width: 140px;
+    text-align: right;
+    vertical-align: top;
+
+}​
+
+
+ /*Hier beginnt der spass*/
+

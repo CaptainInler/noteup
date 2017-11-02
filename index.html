@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Projekt1 beim CAS-FEE an der HSR</title>
-    <link rel="stylesheet" href="style.css">
+    <link id="style" rel="stylesheet" href="style.css">
 
 </head>
 <body>
+
+
 
         <header>
                 <h1>Notizverwaltung</h1>
@@ -45,8 +47,12 @@
 
         <nav>
             <button id="createNote" onClick=editNote(this)>Notiz erstellen</button>
-            <button id="changeStyle">Change Style</button>
+            <button id="changeStyle" value="ori" onClick=changeStyle(this)>Nicht Drücken</button>
         </nav>
+
+
+
+
 
         <script id="notizVorlage" type="text/x-handlebars-template">
 

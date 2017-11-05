@@ -162,6 +162,20 @@ function mainNote(){
         let note = getNoteByID(sessionStorage.create);
         displayNote(note);
     }
+
+
+    if (sessionStorage.style !== undefined){
+        if (JSON.parse(sessionStorage.style) === "ori"){
+            document.getElementById("style").setAttribute("href", "alternativ.css");
+        }
+        else{
+            document.getElementById("style").setAttribute("href", "style.css");
+
+
+        }
+    }
+
+
 }
 
 

@@ -9,8 +9,6 @@
 </head>
 <body>
 
-
-
         <header>
                 <h1>Notizverwaltung</h1>
         </header>
@@ -20,22 +18,22 @@
                 <div class="sorter">
                     <div id="sortFinishedDate">Zu erledigen bis</div>
                     <div>
-                        <a onClick=sortFinished("down") >&#x21c3;</a>
-                        <a onClick=sortFinished("up")>&#x21be;</a>
+                        <a id="fnDatedown">&#x21c3;</a>
+                        <a id="fnDateup">&#x21be;</a>
                     </div>
                 </div>
                 <div class="sorter">
                     <div id="sortCreatedDate">Erstellungsdatum</div>
                     <div>
-                        <a onClick=sortCreate("down")>&#x21c3;</a>
-                        <a onClick=sortCreate("up")>&#x21be;</a>
+                        <a id="sortCreatedown">&#x21c3;</a>
+                        <a id="sortCreateup">&#x21be;</a>
                     </div>
                 </div>
                 <div class="sorter">
                     <div id="sortImportance">Wichtigkeit</div>
                     <div>
-                        <a onClick=sortImportance("down")>&#x21c3;</a>
-                        <a onClick=sortImportance("up")>&#x21be;</a>
+                        <a id="sortImportdown">&#x21c3;</a>
+                        <a id="sortImportup">&#x21be;</a>
                     </div>
                 </div>
                 <div class="sorter">
@@ -46,8 +44,8 @@
         </nav>
 
         <nav>
-            <button id="createNote" onClick=editNote(this)>Notiz erstellen</button>
-            <button id="changeStyle" value="ori" onClick=changeStyle(this)>Nicht Drücken</button>
+            <button id="createNote">Notiz erstellen</button>
+            <button id="changeStyle" value="ori">Nicht Drücken</button>
         </nav>
 
 
@@ -98,7 +96,7 @@
         <script src="code.js"></script>
         <script src="model.js"></script>
         <script>
-            document.addEventListener("DOMContentLoaded", main());
+            document.addEventListener("DOMContentLoaded", main);
         </script>
 
 </body>

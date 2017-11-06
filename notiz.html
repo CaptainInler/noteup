@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <title>Notiz</title>
     <link id="style" rel="stylesheet" href="style.css">
-    <script src="code.js"></script>
-    <script src="model.js"></script>
+
 </head>
 <body>
 
@@ -54,16 +53,17 @@
 
 <footer id="noteCancel">
     <script src="code.js"></script>
-    <input type="button" id="noteBtnSave" onClick="saveNote()" value="Speichern">
-    <!--TODO: Achtung, bis jetzt wird die bearbeitete notiz gelöscht wenn abbrechen gedrückt wird...-->
-    <input type="button" id="noteBtnCancel" onClick="location.href='index.html'" value="Abbrechen">
+    <input type="button" id="noteBtnSave" value="Speichern">
+    <input type="button" id="noteBtnCancel" value="Abbrechen">
 </footer>
 
 <script src="handlebars-v4.0.10.js"></script>
+<script src="codenote.js"></script>
+<script src="model.js"></script>
 
 <script>
     // TODO: Abklären ob hier wirklich ein eventhandler nötig ist oder ob handlebar sonstwie aufgerufen werden kann..
-    document.addEventListener("DOMContentLoaded", mainNote());
+    document.addEventListener("DOMContentLoaded", mainNote);
 </script>
 
 </body>

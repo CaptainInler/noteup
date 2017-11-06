@@ -1,6 +1,21 @@
 "use strict";
 
-// Controller
+// Controller für index.html
+
+// registrieren aller buttons
+document.getElementById("fnDatedown").onclick = function() {sortFinished("down")};
+document.getElementById("fnDateup").onclick = function() {sortFinished("up")};
+
+document.getElementById("sortCreatedown").onclick = function() {sortCreate("down")};
+document.getElementById("sortCreateup").onclick = function() {sortCreate("up")};
+
+document.getElementById("sortImportdown").onclick = function() {sortImportance("down")};
+document.getElementById("sortImportup").onclick = function() {sortImportance("up")};
+
+document.getElementById("createNote").onclick = function() {editNote(this)};
+document.getElementById("changeStyle").onclick = function() {changeStyle(this)};
+
+
 
 /**
  * Liest die gespeicherten Notizen aus dem Modell aus und gibt sie in die Browseranzeige aus.
@@ -26,7 +41,7 @@ function main() {
 
     let showDone = sessionStorage.showDone;
 
-    if (showDone === undefined){
+    if (typeof(showDone) === "undefined"){
         showDone = false;
     }
     else {
@@ -48,7 +63,7 @@ function main() {
     document.getElementById("shFinished").checked = showDone;
 
 
-    if (sessionStorage.style !== undefined){
+    if (typeof(sessionStorage.style) !== "undefined"){
         if (JSON.parse(sessionStorage.style) === "ori"){
             document.getElementById("style").setAttribute("href", "alternativ.css");
             document.getElementById("changeStyle").setAttribute("value", "alternativ");
@@ -61,7 +76,6 @@ function main() {
 
         }
     }
-
 
 }
 
@@ -141,108 +155,4 @@ function changeStyle(button){
 
     window.location.replace("index.html");
 
-}
-
-
-
-// -------------------------------------------------------------------------------------------------------------------
-// Teil für notiz.html
-
-/**
- * Hauptmethode wenn die Notizseite geöffnet wird
- */
-function mainNote(){
-
-    // Prüfen ob eine neue Notiz erstellt, oder ob eine bestehende Notiz bearbeitet werden soll
-    if (sessionStorage.create === "create"){
-        displayNote();
-    }
-    else if(sessionStorage.create !== undefined){
-        // Notiz aus dem Sessionstorage heraussuchen und darstellen lassen
-        let note = getNoteByID(sessionStorage.create);
-        displayNote(note);
-    }
-
-
-    if (sessionStorage.style !== undefined){
-        if (JSON.parse(sessionStorage.style) === "ori"){
-            document.getElementById("style").setAttribute("href", "alternativ.css");
-        }
-        else{
-            document.getElementById("style").setAttribute("href", "style.css");
-
-
-        }
-    }
-
-
-}
-
-
-/**
- * Zeigt den Inhlat einer Notiz in notiz.html an
- * @param {notiz} [context] - Ein Notizobjekt
- */
-function displayNote(context){
-
-    // Handlebar template entgegen nehmen
-    let tlContent = document.getElementById("notizBearbeiten");
-    let source = tlContent.innerHTML;
-    let template = Handlebars.compile(source);
-
-    if (context === undefined){
-        context = {noteInputTitle: "Titel...",
-            noteInputText: "Beschreibung...",
-            noteInputImportance: "",
-            noteInputDate: "",
-            noteID: "0",
-            noteCreateDate: "0"
-        };
-    }
-    else{
-        context = context.getNote();
-    }
-
-    // Notizen in das Handlebarstemplate einfügen
-    let result = template(context);
-
-    // handlebarteplate inkl. daten in das html einfügen
-    tlContent.insertAdjacentHTML('afterend', result);
-}
-
-
-/**
- *Nimmt die Angaben zu einer Notiz aus dem html entgegen und gibt sie zur speicherung an das modell weiter
- */
-function saveNote(){
-
-    let title = document.getElementById("noteInputTitle").value;
-    let description = document.getElementById("noteInputText").value;
-    let importance = document.getElementById("noteInputImportance").value;
-    let date = document.getElementById("noteInputDate").value;
-    let finished = "";
-    if (document.getElementById("noteInputFinished").checked){
-        finished = "checked";
-    }
-
-    let created = document.getElementById("noteCreateDate").getAttribute("value");
-    if (created==="0"){
-        created = Date.now();
-    }
-
-    let id = document.getElementById("noteIdentifaction").getAttribute("value");
-    if (id==="0"){
-        id = Date.now() + title + Math.random();
-    }
-    else{
-        // löschen der alten Notiz
-        deleteNote(id);
-    }
-
-    let note = new notiz(id, title, description, importance, date, finished, created);
-
-    addNoteToSessionCache(note);
-
-    //die Darstelung zum Erstellen einer Notiz wird durch index.html ersetzt
-    window.location.replace("index.html");
 }

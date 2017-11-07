@@ -4,12 +4,12 @@
 
 
 /**
- * Das notiz-Objekt representiert eine Notiz mit allen seinen Informationen
+ * Das Notiz-Objekt representiert eine Notiz mit allen seinen Informationen
  */
-class notiz {
+class Notiz {
 
     /**
-     * Der Konstruktor des notiz-Objekts nimmt die Daten entgegen und speichert sie in die entsprechenden variabeln
+     * Der Konstruktor des Notiz-Objekts nimmt die Daten entgegen und speichert sie in die entsprechenden variabeln
      * @constructor
      * @param {string} id - ID der Notiz
      * @param {string} title - Titel der Notiz
@@ -31,7 +31,7 @@ class notiz {
 
 
     /**
-     * @typedef {Object} notiz
+     * @typedef {Object} Notiz
      * @property {string} noteID - ID der Notiz
      * @property {string} noteInputTitle - Titel
      * @property {string} noteInputText - Text
@@ -43,7 +43,7 @@ class notiz {
 
     /**
      * gibt die Variabeln der Notiz als Object zurück
-     * @returns {notiz} Abgespeicherte Werte einer Notiz als Notiz-Objekt
+     * @returns {Notiz} Abgespeicherte Werte einer Notiz als Notiz-Objekt
      */
     getNote(){
 
@@ -65,14 +65,14 @@ class notiz {
 
 /**
  * fügt die Daten einer Notizen in den sessionCache des Browsers zu den bereits gespeicherten Notizen hinzu
- * @param {notiz} notiz - Die Angaben zu einer Notiz
+ * @param {Notiz} notiz - Die Angaben zu einer Notiz
  */
 function addNoteToSessionCache(notiz) {
 
     // die bisher gepseicherten notizen lesen und in einen Array ablegen
     let note = getSavedNotes();
 
-    // die neu eingegebene notiz dem array hinzufügen
+    // die neu eingegebene Notiz dem array hinzufügen
     note.push(notiz.getNote());
     sessionStorage.notizen = JSON.stringify(note);
 }
@@ -96,7 +96,7 @@ function getSavedNotes() {
 /**
  * Gibt die Informationen einer spezifischenNotiz aus dem sessionstorage zurück
  * @param {string} id - ID der Notiz welche gesucht wird
- * @returns {notiz}
+ * @returns {Notiz}
  */
 function getNoteByID(id){
     let allNotes = getSavedNotes();
@@ -106,7 +106,7 @@ function getNoteByID(id){
     // Suchen nach der Notiz mit der entsprechenden ID
     for (let i = 0; i < allNotes.length; i++) {
         if (allNotes[i].noteID === id) {
-            return new notiz(allNotes[i].noteID,
+            return new Notiz(allNotes[i].noteID,
                 allNotes[i].noteInputTitle,
                 allNotes[i].noteInputText,
                 allNotes[i].noteInputImportance,
@@ -131,7 +131,7 @@ function deleteNote(id){
     // Suchen nach der Notiz mit der entsprechenden ID
     for (let i = 0; i < allNotes.length; i++) {
         if (allNotes[i].noteID !== id) {
-            let note = new notiz(allNotes[i].noteID,
+            let note = new Notiz(allNotes[i].noteID,
                 allNotes[i].noteInputTitle,
                 allNotes[i].noteInputText,
                 allNotes[i].noteInputImportance,

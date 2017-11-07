@@ -40,8 +40,8 @@ function mainNote(){
 
 
 /**
- * Zeigt den Inhlat einer Notiz in notiz.html an
- * @param {notiz} [context] - Ein Notizobjekt
+ * Zeigt den Inhalt einer Notiz in Notiz.html an
+ * @param {Notiz} [context] - Ein Notizobjekt
  */
 function displayNote(context){
 
@@ -99,7 +99,7 @@ function saveNote() {
         deleteNote(id);
     }
 
-    let note = new notiz(id, title, description, importance, date, finished, created);
+    let note = new Notiz(id, title, description, importance, date, finished, created);
 
     addNoteToSessionCache(note);
 

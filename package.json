@@ -1,0 +1,8 @@
+{
+  "name": "noteup",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "^4.16.2",
+    "nedb": "^1.8.0"
+  }
+}

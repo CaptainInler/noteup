@@ -98,24 +98,24 @@ function getSavedNotes() {
  * @param {string} id - ID der Notiz welche gesucht wird
  * @returns {Notiz}
  */
-function getNoteByID(id){
-    let allNotes = getSavedNotes();
-
-    //TODO: lässt sich sicher mit deleteNote() zusammenfügen. codeduplikation
-
-    // Suchen nach der Notiz mit der entsprechenden ID
-    for (let i = 0; i < allNotes.length; i++) {
-        if (allNotes[i].noteID === id) {
-            return new Notiz(allNotes[i].noteID,
-                allNotes[i].noteInputTitle,
-                allNotes[i].noteInputText,
-                allNotes[i].noteInputImportance,
-                allNotes[i].noteInputDate,
-                allNotes[i].noteInputFinished,
-                allNotes[i].noteCreateDate);
-        }
-    }
-}
+// function getNoteByID(id){
+//     let allNotes = getSavedNotes();
+//
+//     //TODO: lässt sich sicher mit deleteNote() zusammenfügen. codeduplikation
+//
+//     // Suchen nach der Notiz mit der entsprechenden ID
+//     for (let i = 0; i < allNotes.length; i++) {
+//         if (allNotes[i].noteID === id) {
+//             return new Notiz(allNotes[i].noteID,
+//                 allNotes[i].noteInputTitle,
+//                 allNotes[i].noteInputText,
+//                 allNotes[i].noteInputImportance,
+//                 allNotes[i].noteInputDate,
+//                 allNotes[i].noteInputFinished,
+//                 allNotes[i].noteCreateDate);
+//         }
+//     }
+// }
 
 
 /**

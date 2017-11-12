@@ -1,5 +1,5 @@
-const Datastore = require('nedb');
-const db = new Datastore({ filename: './models/notes.db', autoload: true});
+const fs = require("fs");
+const path = require('path');
 
 class Notiz {
 
@@ -27,22 +27,57 @@ class Notiz {
 
 let notesController = {
 
-    getNotes: function(callback) {
-        db.find({}, callback);
+    getNoteByID: function(req, res) {
+
+        //datei folgendermasen lesen: funktioniert sonst nicht mit linux
+        let jsonPath = path.join(__dirname, '..', 'models', 'notizen.json');
+        let data = fs.readFileSync(jsonPath);
+        let note = JSON.parse(data);
+        console.log("test");
+        console.log(note);
+        res.send("gelesen")
+
     },
 
-    getNote: function(id, callback) {
-        db.findOne({ _id: id }, callback);
+    getAllNotes: function(req, res) {
+
+        //datei folgendermasen lesen: funktioniert sonst nicht mit linux
+        let note = readAllNotes();
+        console.log("alle Notizen gelesen");
+        res.send(note)
+
     },
 
-    addNote: function(callback) {
-        let note = new Notiz();
-        db.insert(note, callback);
-    },
+    addNote: function(req, res){
 
-    deleteNote: function(id, callback) {
-        db.remove({ _id: id }, {multi: false}, callback);
+        console.log("post ok");
+
+        let note = readAllNotes();
+
+        // die neu eingegebene Notiz dem array hinzufügen
+        let notiz = (req.params);
+        note.push(notiz.note);
+        let data = JSON.stringify(note);
+        let jsonPath = path.join(__dirname, '..', 'models', 'notizen.json');
+        fs.writeFile(jsonPath, data);
+
+        res.send("ok");
+
     }
 };
+
+
+function readAllNotes() {
+
+    let jsonPath = path.join(__dirname, '..', 'models', 'notizen.json');
+    let data = fs.readFileSync(jsonPath);
+    let note = JSON.parse(data);
+    console.log("alle Notizen gelesen");
+    return note;
+
+
+}
+
+
 
 module.exports = notesController;

@@ -101,7 +101,8 @@ function saveNote() {
 
     let note = new Notiz(id, title, description, importance, date, finished, created);
 
-    addNoteToSessionCache(note);
+    // addNoteToSessionCache(note);
+    addNoteToStorage(note);
 
     //die Darstelung zum Erstellen einer Notiz wird durch index.html ersetzt
     window.location.replace("index.html");

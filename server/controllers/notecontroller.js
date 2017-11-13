@@ -34,7 +34,7 @@ let notesController = {
         let data = fs.readFileSync(jsonPath);
         let note = JSON.parse(data);
         console.log("test");
-        console.log(note);
+        // console.log(note);
         res.send("gelesen")
 
     },
@@ -44,6 +44,7 @@ let notesController = {
         //datei folgendermasen lesen: funktioniert sonst nicht mit linux
         let note = readAllNotes();
         console.log("alle Notizen gelesen");
+        console.log(note);
         res.send(note)
 
     },
@@ -51,17 +52,27 @@ let notesController = {
     addNote: function(req, res){
 
         console.log("post ok");
+        // console.log(req.body);
 
         let note = readAllNotes();
+        console.log("typ: " + typeof(note));
+        // console.log(note[0]);
+
+        note.forEach(function(elem, index){
+
+            console.log(elem.notiz)
+        });
+
+
 
         // die neu eingegebene Notiz dem array hinzufügen
-        let notiz = (req.params);
-        note.push(notiz.note);
-        let data = JSON.stringify(note);
+        let notiz = (req.body);
+        note.push(notiz);
+        let data = JSON.stringify(note, null, 2);
         let jsonPath = path.join(__dirname, '..', 'models', 'notizen.json');
-        fs.writeFile(jsonPath, data);
+        fs.writeFileSync(jsonPath, data);
 
-        res.send("ok");
+        // res.send("ok");
 
     }
 };

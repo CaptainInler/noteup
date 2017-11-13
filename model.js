@@ -62,20 +62,61 @@ class Notiz {
     }
 }
 
+//
+// /**
+//  * fügt die Daten einer Notizen in den sessionCache des Browsers zu den bereits gespeicherten Notizen hinzu
+//  * @param {Notiz} notiz - Die Angaben zu einer Notiz
+//  */
+// function addNoteToSessionCache(notiz) {
+//
+//     // die bisher gepseicherten notizen lesen und in einen Array ablegen
+//     let note = getSavedNotes();
+//
+//     // die neu eingegebene Notiz dem array hinzufügen
+//     note.push(notiz.getNote());
+//     sessionStorage.notizen = JSON.stringify(note);
+//
+// }
 
-/**
- * fügt die Daten einer Notizen in den sessionCache des Browsers zu den bereits gespeicherten Notizen hinzu
- * @param {Notiz} notiz - Die Angaben zu einer Notiz
- */
-function addNoteToSessionCache(notiz) {
 
-    // die bisher gepseicherten notizen lesen und in einen Array ablegen
-    let note = getSavedNotes();
 
-    // die neu eingegebene Notiz dem array hinzufügen
-    note.push(notiz.getNote());
-    sessionStorage.notizen = JSON.stringify(note);
+function addNoteToStorage(notiz){
+    let xhr = new XMLHttpRequest();
+
+    // xhr.addEventListener("readystatechange", function () {
+    //     if (this.readyState === 4) {
+    //         console.log(this.responseText);
+    //     }
+    // });
+
+    xhr.open("POST", "http://127.0.0.1:3001/notiz/addNote", true);
+    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+
+    xhr.send("notiz=" + JSON.stringify(notiz));
+
+    // console.log(xhr.readyState);
+    // console.log(xhr.responseText);
+
 }
+
+// /**
+//  * Gibt alle gespeicherten Notizen aus dem sessionCache des Browsers zurück
+//  * @returns {Array} Die einzelnen Notiz-Objekten sind in einem Array enthalten.
+//  */
+// function getSavedNotes() {
+//
+//     // prüfen, ob bereits Notizen im sessionCache gespeichert sind
+//     if (sessionStorage.notizen !== undefined){
+//         let noti = sessionStorage.notizen;
+//         let noti2 = JSON.parse(noti);
+//         return noti2;
+//     }
+//     else{
+//         return [];
+//     }
+// }
+
+
 
 /**
  * Gibt alle gespeicherten Notizen aus dem sessionCache des Browsers zurück
@@ -83,39 +124,36 @@ function addNoteToSessionCache(notiz) {
  */
 function getSavedNotes() {
 
-    // prüfen, ob bereits Notizen im sessionCache gespeichert sind
-    if (sessionStorage.notizen !== undefined){
-        return JSON.parse(sessionStorage.notizen);
-    }
-    else{
-        return [];
-    }
+
+
+
+
+
+    let xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    let data = null;
+
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === 4) {
+            console.log(this.responseText);
+            data = this.responseText;
+        }
+    });
+
+    xhr.open("GET", "http://127.0.0.1:3001/notiz/getAllNotes");
+    xhr.setRequestHeader("cache-control", "no-cache");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send();
+    console.log(xhr.responseText);
+
+    return JSON.parse(data)
 }
 
 
-/**
- * Gibt die Informationen einer spezifischenNotiz aus dem sessionstorage zurück
- * @param {string} id - ID der Notiz welche gesucht wird
- * @returns {Notiz}
- */
-// function getNoteByID(id){
-//     let allNotes = getSavedNotes();
-//
-//     //TODO: lässt sich sicher mit deleteNote() zusammenfügen. codeduplikation
-//
-//     // Suchen nach der Notiz mit der entsprechenden ID
-//     for (let i = 0; i < allNotes.length; i++) {
-//         if (allNotes[i].noteID === id) {
-//             return new Notiz(allNotes[i].noteID,
-//                 allNotes[i].noteInputTitle,
-//                 allNotes[i].noteInputText,
-//                 allNotes[i].noteInputImportance,
-//                 allNotes[i].noteInputDate,
-//                 allNotes[i].noteInputFinished,
-//                 allNotes[i].noteCreateDate);
-//         }
-//     }
-// }
+
+
+
 
 
 /**

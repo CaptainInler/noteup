@@ -125,10 +125,6 @@ function addNoteToStorage(notiz){
 function getSavedNotes() {
 
 
-
-
-
-
     let xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
 
@@ -148,6 +144,8 @@ function getSavedNotes() {
     console.log(xhr.responseText);
 
     return JSON.parse(data)
+
+    //TODO: No 'Access-Control-Allow-Origin' header is present on the requested resource.
 }
 
 

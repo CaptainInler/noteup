@@ -1,5 +1,20 @@
 [
   {
-    "notiz": "{\"id\":\"1510606489479Titel...0.5184769574969812\",\"titel\":\"Titel...\",\"description\":\"Beschreibung...\",\"importance\":\"\",\"date\":\"\",\"finished\":\"\",\"created\":1510606489479}"
+    "noteID": "1510607934866Titel...0.3706208102130606",
+    "noteInputTitle": "Titel...",
+    "noteInputText": "Beschreibung...",
+    "noteInputImportance": "",
+    "noteInputDate": "",
+    "noteInputFinished": "",
+    "noteCreateDate": 1510607934866
+  },
+  {
+    "noteID": "1510608029946Titel...0.6264645465882179",
+    "noteInputTitle": "Titel...",
+    "noteInputText": "Beschreibung...",
+    "noteInputImportance": "",
+    "noteInputDate": "",
+    "noteInputFinished": "",
+    "noteCreateDate": 1510608029946
   }
 ]

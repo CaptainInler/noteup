@@ -30,17 +30,17 @@ function main() {
     // abrufen der bereits gespeicherten Notizen
     let context = getSavedNotes();
 
+    (console.log(context));
 
 
     function checkDone(notiz) {
         if (notiz.noteInputFinished === ""){
             return notiz;
         }
-
     }
 
     let showDone = sessionStorage.showDone;
-
+    // Prüfen, ob die Checkbox "Erledigt anzeigen" aktiviert ist
     if (typeof(showDone) === "undefined"){
         showDone = false;
     }
@@ -49,9 +49,9 @@ function main() {
     }
 
     if (!showDone) {
+        // Notizen herausfiltern, die erledigt sind
         context= context.filter(checkDone);
     }
-
 
     // Notizen in das Handlebarstemplate einfügen
     let result = template(context);

@@ -23,7 +23,6 @@ function mainNote(){
         displayNote(note);
     }
 
-
     if (typeof(sessionStorage.style) !== "undefined"){
         if (JSON.parse(sessionStorage.style) === "ori"){
             document.getElementById("style").setAttribute("href", "alternativ.css");
@@ -31,11 +30,8 @@ function mainNote(){
         else{
             document.getElementById("style").setAttribute("href", "style.css");
 
-
         }
     }
-
-
 }
 
 
@@ -102,7 +98,7 @@ function saveNote() {
     let note = new Notiz(id, title, description, importance, date, finished, created);
 
     // addNoteToSessionCache(note);
-    addNoteToStorage(note);
+    addNoteToStorage(note.getNote());
 
     //die Darstelung zum Erstellen einer Notiz wird durch index.html ersetzt
     window.location.replace("index.html");

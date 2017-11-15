@@ -13,7 +13,6 @@ router.use(function timeLog (req, res, next) {
 });
 
 
-router.get("/getNote/:noteId", notesController.getNoteByID);
 router.get("/getAllNotes", notesController.getAllNotes);
 router.post("/addNote", notesController.addNote);
 

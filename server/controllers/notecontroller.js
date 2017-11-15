@@ -27,52 +27,31 @@ class Notiz {
 
 let notesController = {
 
-    getNoteByID: function(req, res) {
-
-        //datei folgendermasen lesen: funktioniert sonst nicht mit linux
-        let jsonPath = path.join(__dirname, '..', 'models', 'notizen.json');
-        let data = fs.readFileSync(jsonPath);
-        let note = JSON.parse(data);
-        console.log("test");
-        // console.log(note);
-        res.send("gelesen")
-
-    },
-
     getAllNotes: function(req, res) {
 
-        //datei folgendermasen lesen: funktioniert sonst nicht mit linux
         let note = readAllNotes();
         console.log("alle Notizen gelesen");
-        console.log(note);
+        // console.log(note);
         res.send(note)
 
     },
 
     addNote: function(req, res){
 
-        console.log("post ok");
-        // console.log(req.body);
-
         let note = readAllNotes();
-        console.log("typ: " + typeof(note));
-        // console.log(note[0]);
+        let neu;
 
-        note.forEach(function(elem, index){
-
-            console.log(elem.notiz)
-        });
-
-
+        for (let y in req.body){
+            neu = JSON.parse(y);
+        }
 
         // die neu eingegebene Notiz dem array hinzufügen
-        let notiz = (req.body);
-        note.push(notiz);
+        note.push(neu);
         let data = JSON.stringify(note, null, 2);
         let jsonPath = path.join(__dirname, '..', 'models', 'notizen.json');
         fs.writeFileSync(jsonPath, data);
 
-        // res.send("ok");
+        // TODO: res.send("ok");
 
     }
 };
@@ -80,6 +59,7 @@ let notesController = {
 
 function readAllNotes() {
 
+    //datei folgendermasen lesen: funktioniert sonst nicht mit linux
     let jsonPath = path.join(__dirname, '..', 'models', 'notizen.json');
     let data = fs.readFileSync(jsonPath);
     let note = JSON.parse(data);

@@ -43,9 +43,6 @@ let notesController = {
         let sortby = req.params.topic;
         let direction = req.params.direction;
 
-        console.log("topic: " + sortby);
-        console.log("direction: " + direction);
-
         if (direction === "up") {
             allNotes.sort(function (a, b) {
                 return parseInt(String(b[sortby]).replace(/-/g,'')) - parseInt(String(a[sortby]).replace(/-/g,''));
@@ -62,8 +59,6 @@ let notesController = {
         fs.writeFileSync(jsonPath, data);
 
         res.send("sortierung ok")
-
-
     },
 
     addNote: function(req, res){
@@ -71,9 +66,9 @@ let notesController = {
         let note = readAllNotes();
         let neu;
 
-        //suchen in index. Alle notizen werden da drin gesendent, nicht in values..
-        for (let y in req.body){
-            neu = JSON.parse(y);
+        //suchen in index. Alle notizen werden da drin gesendet, nicht in values..
+        for (let content in req.body){
+            neu = JSON.parse(content);
         }
 
         // die neu eingegebene Notiz dem array hinzufügen
@@ -82,7 +77,7 @@ let notesController = {
         let jsonPath = path.join(__dirname, '..', 'models', 'notizen.json');
         fs.writeFileSync(jsonPath, data);
 
-        // TODO: res.send("ok");
+        res.send("added note with id: " + neu.noteID);
 
     },
 
@@ -91,11 +86,9 @@ let notesController = {
         let allNotes = readAllNotes();
         let newNotes=[];
 
-
         for (let y in req.body) {
             newNotes.push(JSON.parse(y));
         }
-
 
         let id =req.params.noteId;
         // console.log("noteid : " + id.noteId);
@@ -107,11 +100,9 @@ let notesController = {
             }
         }
 
-
         let data = JSON.stringify(newNotes, null, 2);
         let jsonPath = path.join(__dirname, '..', 'models', 'notizen.json');
         fs.writeFileSync(jsonPath, data);
-
     }
 };
 
@@ -121,12 +112,8 @@ function readAllNotes() {
     //JSON-Datei wie folgt öffnen: funktioniert sonst nicht mit linux
     let jsonPath = path.join(__dirname, '..', 'models', 'notizen.json');
     let data = fs.readFileSync(jsonPath);
-    let note = JSON.parse(data);
-    // console.log("alle Notizen gelesen");
-    return note;
+    return JSON.parse(data);
 }
-
-
 
 
 module.exports = notesController;

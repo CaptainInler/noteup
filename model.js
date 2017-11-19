@@ -1,8 +1,5 @@
 'use strict';
 
-// Model (MVC-Pattern)
-
-
 /**
  * Das Notiz-Objekt representiert eine Notiz mit allen seinen Informationen
  */
@@ -48,7 +45,6 @@ class Notiz {
     getNote(){
 
         let notiz = {};
-        // let notiz = new Object(); -> noob-info: alternative schreibmöglichkiet zu "{}"
 
         notiz["noteID"] = this.id;
         notiz["noteInputTitle"] = this.titel;
@@ -62,45 +58,27 @@ class Notiz {
     }
 }
 
-
 function addNoteToStorage(notiz){
     let xhr = new XMLHttpRequest();
 
-    // xhr.addEventListener("readystatechange", function () {
-    //     if (this.readyState === 4) {
-    //         console.log(this.responseText);
-    //     }
-    // });
-
-    xhr.open("POST", "http://127.0.0.1:3001/managenote/addNote", true);
+    xhr.open("POST", "http://127.0.0.1:3001/addNote", true);
     xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
 
     xhr.send(JSON.stringify(notiz));
-
 }
-
 
 function editNoteInStorage(notiz){
     let xhr = new XMLHttpRequest();
 
-    // xhr.addEventListener("readystatechange", function () {
-    //     if (this.readyState === 4) {
-    //         console.log(this.responseText);
-    //     }
-    // });
-
-
-    xhr.open("PUT", "http://127.0.0.1:3001/managenote/editNote/" + notiz.noteID, true);
-    // console.log("put id:" + notiz.noteID);
+    xhr.open("PUT", "http://127.0.0.1:3001/editNote/" + notiz.noteID, true);
     xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
 
     xhr.send(JSON.stringify(notiz));
-
 }
 
 
 /**
- * Gibt alle gespeicherten Notizen aus dem sessionCache des Browsers zurück
+ * Gibt alle gespeicherten Notizen zurück
  * @returns {Array} Die einzelnen Notiz-Objekten sind in einem Array enthalten.
  */
 function getSavedNotes() {
@@ -112,23 +90,15 @@ function getSavedNotes() {
 
     xhr.addEventListener("readystatechange", function () {
         if (this.readyState === 4) {
-            // console.log("readystate changed to: " + this.readyState);
-            // console.log("this.responseText: " + this.responseText);
             data = this.responseText;
-            // console.log(typeof(data));
-            let asdsf = JSON.parse(data);
-            // console.log(typeof(asdsf));
-            // return JSON.parse(data);
         }
     });
 
-    xhr.open("GET", "http://127.0.0.1:3001/managenote/getAllNotes", false);
+    xhr.open("GET", "http://127.0.0.1:3001/getAllNotes", false);
     // cache-control nicht erlaubt wenn allowCrossDomain aktiv ist
     // xhr.setRequestHeader("cache-control", "no-cache");
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send();
-
-    // console.log("Get Saved Notes: " + xhr.responseText);
 
     return JSON.parse(data);
 }
@@ -144,11 +114,9 @@ function sortNote(sortby, direction){
     let xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
 
-
-    xhr.open("GET", `http://127.0.0.1:3001/managenote/sortAllNotes/${sortby}/${direction}`, false);
+    xhr.open("GET", `http://127.0.0.1:3001/sortAllNotes/${sortby}/${direction}`, false);
     // cache-control nicht erlaubt wenn allowCrossDomain aktiv ist
     // xhr.setRequestHeader("cache-control", "no-cache");
     // xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send();
-
 }

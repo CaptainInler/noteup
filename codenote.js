@@ -18,7 +18,6 @@ function mainNote(){
         displayNote();
     }
     else if(typeof(sessionStorage.create) !== "undefined"){
-        // Notiz aus dem Sessionstorage heraussuchen und darstellen lassen
         let note = getNoteByID(sessionStorage.create);
         displayNote(note);
     }
@@ -102,7 +101,6 @@ function saveNote() {
         editNoteInStorage(note.getNote());
     }
 
-
     //die Darstelung zum Erstellen einer Notiz wird durch index.html ersetzt
     window.location.replace("index.html");
 }
@@ -115,7 +113,6 @@ function saveNote() {
  */
 function getNoteByID(id){
     let allNotes = getSavedNotes();
-
 
     // Suchen nach der Notiz mit der entsprechenden ID
     for (let i = 0; i < allNotes.length; i++) {

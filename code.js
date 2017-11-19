@@ -32,7 +32,6 @@ function main() {
 
     (console.log(context));
 
-
     function checkDone(notiz) {
         if (notiz.noteInputFinished === ""){
             return notiz;
@@ -56,12 +55,10 @@ function main() {
     // Notizen in das Handlebarstemplate einfügen
     let result = template(context);
 
-
     // handlebarteplate inkl. daten in das html einfügen
     tlContent.insertAdjacentHTML('afterend', result);
 
     document.getElementById("shFinished").checked = showDone;
-
 
     if (typeof(sessionStorage.style) !== "undefined"){
         if (JSON.parse(sessionStorage.style) === "ori"){
@@ -73,10 +70,8 @@ function main() {
             document.getElementById("style").setAttribute("href", "style.css");
             document.getElementById("changeStyle").setAttribute("value", "ori");
             document.getElementById("changeStyle").innerHTML = "Nicht Drücken";
-
         }
     }
-
 }
 
 

@@ -17,5 +17,5 @@ let allowCrossDomain = function(req, res, next) {
 
 app.use(allowCrossDomain);
 
-app.use('/managenote', router);
+app.use('', router);
 app.listen(port, hostname, () => {  console.log(`Server running at http://${hostname}:${port}/`); });

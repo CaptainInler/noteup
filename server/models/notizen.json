@@ -1,14 +1,5 @@
 [
   {
-    "noteID": "1511093538685JavaScript lernen0.556082928598014",
-    "noteInputTitle": "JavaScript lernen",
-    "noteInputText": "Übungen repertieren",
-    "noteInputImportance": "5",
-    "noteInputDate": "2017-11-19",
-    "noteInputFinished": "",
-    "noteCreateDate": "1511093538685"
-  },
-  {
     "noteID": "1511093596418node.js0.6934945460528195",
     "noteInputTitle": "node.js",
     "noteInputText": "Einrichten und Konfiguration überprüfen",
@@ -16,5 +7,14 @@
     "noteInputDate": "2017-11-18",
     "noteInputFinished": "",
     "noteCreateDate": "1511093596418"
+  },
+  {
+    "noteID": "1511093538685JavaScript lernen0.556082928598014",
+    "noteInputTitle": "JavaScript lernen",
+    "noteInputText": "Übungen repertieren",
+    "noteInputImportance": "5",
+    "noteInputDate": "2017-11-19",
+    "noteInputFinished": "",
+    "noteCreateDate": "1511093538685"
   }
 ]

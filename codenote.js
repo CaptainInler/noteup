@@ -81,25 +81,52 @@ function saveNote() {
         finished = "checked";
     }
 
+    // falls der erstellt-Tag noch nicht abgefüllt ist.
     let created = document.getElementById("noteCreateDate").getAttribute("value");
     if (created === "0") {
-        created = Date.now();
+        created = Date.now().toString();
     }
 
+
+    //erstellen der Notiz-ID oder die notiz als zu editieren senden
+    let note;
     let id = document.getElementById("noteIdentifaction").getAttribute("value");
     if (id === "0") {
         id = Date.now() + title + Math.random();
+        note = new Notiz(id, title, description, importance, date, finished, created);
+        addNoteToStorage(note.getNote());
     }
     else {
-        // löschen der alten Notiz
-        deleteNote(id);
+        // notiz editieren
+        note = new Notiz(id, title, description, importance, date, finished, created);
+        editNoteInStorage(note.getNote());
     }
 
-    let note = new Notiz(id, title, description, importance, date, finished, created);
-
-    // addNoteToSessionCache(note);
-    addNoteToStorage(note.getNote());
 
     //die Darstelung zum Erstellen einer Notiz wird durch index.html ersetzt
     window.location.replace("index.html");
+}
+
+
+/**
+ * Gibt die Informationen einer spezifischenNotiz aus dem sessionstorage zurück
+ * @param {string} id - ID der Notiz welche gesucht wird
+ * @returns {Notiz}
+ */
+function getNoteByID(id){
+    let allNotes = getSavedNotes();
+
+
+    // Suchen nach der Notiz mit der entsprechenden ID
+    for (let i = 0; i < allNotes.length; i++) {
+        if (allNotes[i].noteID === id) {
+            return new Notiz(allNotes[i].noteID,
+                allNotes[i].noteInputTitle,
+                allNotes[i].noteInputText,
+                allNotes[i].noteInputImportance,
+                allNotes[i].noteInputDate,
+                allNotes[i].noteInputFinished,
+                allNotes[i].noteCreateDate);
+        }
+    }
 }

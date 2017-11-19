@@ -80,6 +80,25 @@ function addNoteToStorage(notiz){
 }
 
 
+function editNoteInStorage(notiz){
+    let xhr = new XMLHttpRequest();
+
+    // xhr.addEventListener("readystatechange", function () {
+    //     if (this.readyState === 4) {
+    //         console.log(this.responseText);
+    //     }
+    // });
+
+
+    xhr.open("PUT", "http://127.0.0.1:3001/managenote/editNote/" + notiz.noteID, true);
+    // console.log("put id:" + notiz.noteID);
+    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+
+    xhr.send(JSON.stringify(notiz));
+
+}
+
+
 /**
  * Gibt alle gespeicherten Notizen aus dem sessionCache des Browsers zurück
  * @returns {Array} Die einzelnen Notiz-Objekten sind in einem Array enthalten.
@@ -93,12 +112,12 @@ function getSavedNotes() {
 
     xhr.addEventListener("readystatechange", function () {
         if (this.readyState === 4) {
-            console.log("readystate changed to: " + this.readyState);
-            console.log("this.responseText: " + this.responseText);
+            // console.log("readystate changed to: " + this.readyState);
+            // console.log("this.responseText: " + this.responseText);
             data = this.responseText;
-            console.log(typeof(data));
+            // console.log(typeof(data));
             let asdsf = JSON.parse(data);
-            console.log(typeof(asdsf));
+            // console.log(typeof(asdsf));
             // return JSON.parse(data);
         }
     });
@@ -109,57 +128,9 @@ function getSavedNotes() {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send();
 
-    console.log("Get Saved Notes: " + xhr.responseText);
+    // console.log("Get Saved Notes: " + xhr.responseText);
 
     return JSON.parse(data);
-}
-
-/**
- * Gibt die Informationen einer spezifischenNotiz aus dem sessionstorage zurück
- * @param {string} id - ID der Notiz welche gesucht wird
- * @returns {Notiz}
- */
-function getNoteByID(id){
-    let allNotes = getSavedNotes();
-
-
-    // Suchen nach der Notiz mit der entsprechenden ID
-    for (let i = 0; i < allNotes.length; i++) {
-        if (allNotes[i].noteID === id) {
-            return new Notiz(allNotes[i].noteID,
-                allNotes[i].noteInputTitle,
-                allNotes[i].noteInputText,
-                allNotes[i].noteInputImportance,
-                allNotes[i].noteInputDate,
-                allNotes[i].noteInputFinished,
-                allNotes[i].noteCreateDate);
-        }
-    }
-}
-
-/**
- *
- * @param {string} id - ID der Notiz welche gelöscht wird
- */
-function deleteNote(id){
-    let allNotes = getSavedNotes();
-
-    // Alle Notizen werden aus dem sessionstorage gelöscht
-    delete sessionStorage.notizen;
-
-    // Suchen nach der Notiz mit der entsprechenden ID
-    for (let i = 0; i < allNotes.length; i++) {
-        if (allNotes[i].noteID !== id) {
-            let note = new Notiz(allNotes[i].noteID,
-                allNotes[i].noteInputTitle,
-                allNotes[i].noteInputText,
-                allNotes[i].noteInputImportance,
-                allNotes[i].noteInputDate,
-                allNotes[i].noteInputFinished,
-                allNotes[i].noteCreateDate);
-            addNoteToSessionCache(note);
-        }
-    }
 }
 
 
@@ -170,19 +141,14 @@ function deleteNote(id){
  */
 function sortNote(sortby, direction){
 
-    let allNotes = getSavedNotes();
+    let xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
 
-    if (direction === "up") {
-        allNotes.sort(function (a, b) {
-            return parseInt(String(b[sortby]).replace(/-/g,'')) - parseInt(String(a[sortby]).replace(/-/g,''));
-        });
-    }
-    else {
-        allNotes.sort(function (a, b) {
-            return parseInt(String(a[sortby]).replace(/-/g,'')) - parseInt(String(b[sortby]).replace(/-/g,''));
-        });
-    }
 
-    sessionStorage.notizen = JSON.stringify(allNotes);
+    xhr.open("GET", `http://127.0.0.1:3001/managenote/sortAllNotes/${sortby}/${direction}`, false);
+    // cache-control nicht erlaubt wenn allowCrossDomain aktiv ist
+    // xhr.setRequestHeader("cache-control", "no-cache");
+    // xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send();
 
 }

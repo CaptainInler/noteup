@@ -8,13 +8,14 @@ router.use(bodyParser.json());
 
 // middleware. wird bei jedem routsaufruf durchlaufen
 router.use(function timeLog (req, res, next) {
-    console.log('%s %s %s', req.method, req.url, req.path, req.body);
+    // console.log('methode: %s url: %s path: %s', req.method, req.url, req.path, req.body);
     next()
 });
 
 
 router.get("/getAllNotes", notesController.getAllNotes);
+router.get("/sortAllNotes/:topic/:direction", notesController.sortAllNotes);
 router.post("/addNote", notesController.addNote);
-
+router.put("/editNote/:noteId", notesController.editNote);
 
 module.exports = router;

@@ -30,9 +30,39 @@ let notesController = {
     getAllNotes: function(req, res) {
 
         let note = readAllNotes();
-        console.log("alle Notizen gelesen");
+        // console.log("alle Notizen gelesen");
         // console.log(note);
         res.send(note)
+
+    },
+
+    sortAllNotes: function(req, res) {
+
+        let allNotes = readAllNotes();
+
+        let sortby = req.params.topic;
+        let direction = req.params.direction;
+
+        console.log("topic: " + sortby);
+        console.log("direction: " + direction);
+
+        if (direction === "up") {
+            allNotes.sort(function (a, b) {
+                return parseInt(String(b[sortby]).replace(/-/g,'')) - parseInt(String(a[sortby]).replace(/-/g,''));
+            });
+        }
+        else {
+            allNotes.sort(function (a, b) {
+                return parseInt(String(a[sortby]).replace(/-/g,'')) - parseInt(String(b[sortby]).replace(/-/g,''));
+            });
+        }
+
+        let data = JSON.stringify(allNotes, null, 2);
+        let jsonPath = path.join(__dirname, '..', 'models', 'notizen.json');
+        fs.writeFileSync(jsonPath, data);
+
+        res.send("sortierung ok")
+
 
     },
 
@@ -41,6 +71,7 @@ let notesController = {
         let note = readAllNotes();
         let neu;
 
+        //suchen in index. Alle notizen werden da drin gesendent, nicht in values..
         for (let y in req.body){
             neu = JSON.parse(y);
         }
@@ -53,21 +84,48 @@ let notesController = {
 
         // TODO: res.send("ok");
 
+    },
+
+    editNote: function(req, res) {
+
+        let allNotes = readAllNotes();
+        let newNotes=[];
+
+
+        for (let y in req.body) {
+            newNotes.push(JSON.parse(y));
+        }
+
+
+        let id =req.params.noteId;
+        // console.log("noteid : " + id.noteId);
+
+        // Suchen nach der Notiz mit der entsprechenden ID
+        for (let i = 0; i < allNotes.length; i++) {
+            if (allNotes[i].noteID !== id) {
+                newNotes.push(allNotes[i]);
+            }
+        }
+
+
+        let data = JSON.stringify(newNotes, null, 2);
+        let jsonPath = path.join(__dirname, '..', 'models', 'notizen.json');
+        fs.writeFileSync(jsonPath, data);
+
     }
 };
 
 
 function readAllNotes() {
 
-    //datei folgendermasen lesen: funktioniert sonst nicht mit linux
+    //JSON-Datei wie folgt öffnen: funktioniert sonst nicht mit linux
     let jsonPath = path.join(__dirname, '..', 'models', 'notizen.json');
     let data = fs.readFileSync(jsonPath);
     let note = JSON.parse(data);
-    console.log("alle Notizen gelesen");
+    // console.log("alle Notizen gelesen");
     return note;
-
-
 }
+
 
 
 

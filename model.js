@@ -58,30 +58,33 @@ class Notiz {
     }
 }
 
-function addNoteToStorage(notiz){
+
+let model = {
+
+ addNoteToStorage: function(notiz){
     let xhr = new XMLHttpRequest();
 
     xhr.open("POST", "http://127.0.0.1:3001/addNote", true);
     xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
 
     xhr.send(JSON.stringify(notiz));
-}
+},
 
-function editNoteInStorage(notiz){
+editNoteInStorage: function(notiz){
     let xhr = new XMLHttpRequest();
 
     xhr.open("PUT", "http://127.0.0.1:3001/editNote/" + notiz.noteID, true);
     xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
 
     xhr.send(JSON.stringify(notiz));
-}
+},
 
 
 /**
  * Gibt alle gespeicherten Notizen zurück
  * @returns {Array} Die einzelnen Notiz-Objekten sind in einem Array enthalten.
  */
-function getSavedNotes() {
+getSavedNotes: function() {
 
     let xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
@@ -101,7 +104,7 @@ function getSavedNotes() {
     xhr.send();
 
     return JSON.parse(data);
-}
+},
 
 
 /**
@@ -109,7 +112,7 @@ function getSavedNotes() {
  * @param {string}  sortby - Notiztag nach welchem sortiert werden soll
  * @param {string}  direction - richtung in welche zu sortieren ist
  */
-function sortNote(sortby, direction){
+sortNote: function(sortby, direction){
 
     let xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
@@ -120,3 +123,4 @@ function sortNote(sortby, direction){
     // xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send();
 }
+};

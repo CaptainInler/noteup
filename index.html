@@ -38,7 +38,7 @@
                 </div>
                 <div class="sorter">
                     <div id="sortDone">Erledigte anzeigen</div>
-                    <input type="checkbox" id="shFinished" onchange="ckbshFinished(this)">
+                    <input type="checkbox" id="shFinished" onchange="code.ckbshFinished(this)">
                 </div>
             </div>
         </nav>
@@ -86,7 +86,7 @@
                 </div>
 
                 <div class="edit" class="note">
-                    <button id="editNote" onClick=editNote(this)>Bearbeiten</button>
+                    <button id="editNote" onClick=code.editNote(this)>Bearbeiten</button>
                 </div>
             </main>
             {{/each}}
@@ -96,7 +96,7 @@
         <script src="code.js"></script>
         <script src="model.js"></script>
         <script>
-            document.addEventListener("DOMContentLoaded", main);
+            document.addEventListener("DOMContentLoaded", code.main);
         </script>
 
 </body>

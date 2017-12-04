@@ -1,5 +1,14 @@
 [
   {
+    "noteID": "1511093538685JavaScript",
+    "noteInputTitle": "JavaScript",
+    "noteInputText": "Übungen repertieren",
+    "noteInputImportance": "2",
+    "noteInputDate": "2017-11-19",
+    "noteInputFinished": "checked",
+    "noteCreateDate": "1511093538685"
+  },
+  {
     "noteID": "1511093596418node.js0.6934945460528195",
     "noteInputTitle": "node.js",
     "noteInputText": "Einrichten und Konfiguration überprüfen",
@@ -9,12 +18,12 @@
     "noteCreateDate": "1511093596418"
   },
   {
-    "noteID": "1511093538685JavaScript",
-    "noteInputTitle": "JavaScript",
-    "noteInputText": "Übungen repertieren",
-    "noteInputImportance": "2",
-    "noteInputDate": "2017-11-19",
-    "noteInputFinished": "checked",
-    "noteCreateDate": "1511093538685"
+    "noteID": "1512411749442Titel...0.13304865572417324",
+    "noteInputTitle": "Titel...",
+    "noteInputText": "Beschreibung...",
+    "noteInputImportance": "",
+    "noteInputDate": "",
+    "noteInputFinished": "",
+    "noteCreateDate": "1512411749442"
   }
 ]
